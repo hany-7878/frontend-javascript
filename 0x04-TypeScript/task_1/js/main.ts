@@ -1,28 +1,31 @@
+// -----------------------------
+// Task 1: Teacher Interface
+// -----------------------------
 
 // Define the Teacher interface
 interface Teacher {
-  readonly firstName: string;       // only set when initialized
-  readonly lastName: string;        // only set when initialized
-  fullTimeEmployee: boolean;        // always defined
-  yearsOfExperience?: number;       // optional
-  location: string;                 // always defined
-  [key: string]: any;               // allow any other property, e.g., contract
+  readonly firstName: string; // Only modifiable when initialized
+  readonly lastName: string;  // Only modifiable when initialized
+  fullTimeEmployee: boolean;  // Always defined
+  yearsOfExperience?: number; // Optional
+  location: string;           // Always defined
+  [key: string]: any;         // Allow any additional property
 }
 
-// Create teachers
+// Example Teachers
 const teacher1: Teacher = {
   firstName: "Hana",
   lastName: "Tesfaye",
   fullTimeEmployee: true,
   location: "Dembi Dolo",
-  yearsOfExperience: 2
+  yearsOfExperience: 2,
 };
 
 const teacher2: Teacher = {
   firstName: "Abebe",
   lastName: "Kebede",
   fullTimeEmployee: false,
-  location: "Addis Ababa"
+  location: "Addis Ababa",
 };
 
 const teacher3: Teacher = {
@@ -30,36 +33,42 @@ const teacher3: Teacher = {
   lastName: "Doe",
   fullTimeEmployee: false,
   location: "London",
-  contract: false
+  contract: false,
 };
+
 console.log(teacher3);
 
-// Define Directors interface that extends Teacher
+// -----------------------------
+// Task 2: Directors Interface
+// -----------------------------
+
 interface Directors extends Teacher {
-  numberOfReports: number;           // required attribute
+  numberOfReports: number; // Required
 }
 
-// Example director
 const director1: Directors = {
-  firstName: 'John',
-  lastName: 'Doe',
-  location: 'London',
+  firstName: "John",
+  lastName: "Doe",
+  location: "London",
   fullTimeEmployee: true,
   numberOfReports: 17,
 };
 
 console.log(director1);
 
-// Array of teachers
+// -----------------------------
+// Extra (Table Rendering Example)
+// -----------------------------
+
 const teachersList: Teacher[] = [teacher1, teacher2, teacher3];
 
-// Render a table in the browser
+// Create table
 const table: HTMLTableElement = document.createElement("table");
 table.style.borderCollapse = "collapse";
 table.style.width = "50%";
 table.style.marginTop = "20px";
 
-// Add table header
+// Create header
 const headerRow = document.createElement("tr");
 const nameHeader = document.createElement("th");
 nameHeader.textContent = "First Name";
@@ -94,37 +103,34 @@ teachersList.forEach((teacher) => {
   table.appendChild(row);
 });
 
-// Append table to the body
 document.body.appendChild(table);
 
-// task 3
+// -----------------------------
+// Task 3: printTeacher Function
+// -----------------------------
 
-// Define an interface for the function
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// Implement the function
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  return `${firstName.charAt(0)}. ${lastName}`;
-};
+const printTeacher: printTeacherFunction = (firstName, lastName) =>
+  `${firstName.charAt(0)}. ${lastName}`;
 
-// Examples
-console.log(printTeacher("John", "Doe"));   // Output: J. Doe
-console.log(printTeacher("Hana", "Tesfaye")); // Output: H. Tesfaye
+console.log(printTeacher("John", "Doe"));     // J. Doe
+console.log(printTeacher("Hana", "Tesfaye")); // H. Tesfaye
 
+// -----------------------------
+// Task 4: Student Class
+// -----------------------------
 
-// task 4
-// Interface for the constructor arguments
+// Interface for constructor arguments
 interface StudentConstructor {
   firstName: string;
   lastName: string;
 }
 
-// Interface for the class itself
+// Interface describing the class
 interface StudentClassInterface {
-  firstName: string;
-  lastName: string;
   workOnHomework(): string;
   displayName(): string;
 }
@@ -150,6 +156,5 @@ class StudentClass implements StudentClassInterface {
 
 // Example usage
 const student = new StudentClass({ firstName: "Hana", lastName: "Tesfaye" });
-
-console.log(student.displayName());   // Output: Hana
-console.log(student.workOnHomework()); // Output: Currently working
+console.log(student.displayName());   // Hana
+console.log(student.workOnHomework()); // Currently working
